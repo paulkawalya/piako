@@ -15,23 +15,20 @@ export function About() {
               <span className="eyebrow text-olive">01 — About Us</span>
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
-              A multidisciplinary consultancy built for Africa&apos;s
-              infrastructure decade.
+              Vision, mission and the principles behind every project.
             </h2>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="text-lg text-ink/75 leading-relaxed">
-              Piako Consult is a multidisciplinary engineering and
-              infrastructure consultancy delivering integrated planning, design,
-              surveying, engineering and project management solutions that
-              support sustainable infrastructure development.
-            </p>
-            <p className="mt-5 text-base text-ink/65 leading-relaxed">
               Our experience covers water and sanitation systems, hospital
               infrastructure, engineering design, construction supervision and
               surveying &mdash; delivered across Uganda, Malawi and Nigeria for
               government, development partners, healthcare institutions and
               private sector clients.
+            </p>
+            <p className="mt-5 text-base text-ink/65 leading-relaxed">
+              We hold ourselves to a clear vision, a focused mission and six
+              core values that govern how we design, supervise and deliver.
             </p>
             <div className="mt-8 flex flex-wrap gap-2.5">
               {["Water & Sanitation", "Healthcare", "Engineering Design", "Construction Supervision", "Surveying"].map(

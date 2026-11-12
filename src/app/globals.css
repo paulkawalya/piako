@@ -202,6 +202,24 @@
   animation: marquee 30s linear infinite;
 }
 
+/* Slow rotating seal badge */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+/* Floating bob animation */
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float-bob 4s ease-in-out infinite;
+}
+
 /* Hover underline reveal */
 .link-underline {
   position: relative;

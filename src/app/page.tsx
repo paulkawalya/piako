@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/piako/navbar";
 import { Hero } from "@/components/piako/hero";
+import { StatsIntro } from "@/components/piako/stats-intro";
 import { About } from "@/components/piako/about";
 import { Services } from "@/components/piako/services";
 import { Projects } from "@/components/piako/projects";
@@ -16,6 +17,7 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <StatsIntro />
         <About />
         <Services />
         <Projects />

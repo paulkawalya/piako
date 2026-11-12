@@ -37,20 +37,29 @@ export function Navbar() {
             <img
               src="/logopiako.png"
               alt="Piako Consult Ltd"
-              className="h-10 w-auto object-contain"
+              className={`h-10 w-auto object-contain transition-all ${
+                scrolled ? "" : ""
+              }`}
             />
             <span className="sr-only">Piako Consult Ltd</span>
           </a>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-7">
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS.map((item, i) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[13px] font-medium tracking-wide text-white/75 hover:text-white transition-colors link-underline"
+                className={`relative text-[13px] font-medium tracking-wide transition-colors link-underline ${
+                  scrolled
+                    ? "text-white/75 hover:text-white"
+                    : "text-ink/70 hover:text-ink"
+                } ${i === 0 ? "font-semibold" : ""}`}
               >
                 {item.label}
+                {i === 0 && !scrolled && (
+                  <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-olive rounded-full" />
+                )}
               </a>
             ))}
           </nav>
@@ -59,7 +68,11 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="hidden sm:inline-flex items-center gap-2 bg-olive hover:bg-olive-dark text-white text-[13px] font-semibold tracking-wide px-5 py-3 rounded-full transition-colors"
+              className={`hidden sm:inline-flex items-center gap-2 text-[13px] font-semibold tracking-wide px-5 py-3 rounded-full transition-colors ${
+                scrolled
+                  ? "bg-olive hover:bg-olive-dark text-white"
+                  : "bg-ink hover:bg-ink-soft text-white"
+              }`}
             >
               Contact
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -68,7 +81,11 @@ export function Navbar() {
               type="button"
               aria-label="Open menu"
               onClick={() => setOpen(true)}
-              className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/15 text-white hover:bg-white/10 transition-colors"
+              className={`lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full border transition-colors ${
+                scrolled
+                  ? "border-white/15 text-white hover:bg-white/10"
+                  : "border-ink/20 text-ink hover:bg-ink/5"
+              }`}
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -98,13 +115,12 @@ export function Navbar() {
           </button>
         </div>
         <nav className="px-5 py-6 flex flex-col">
-          {NAV_ITEMS.map((item, i) => (
+          {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               className="py-4 text-2xl font-display text-white border-b border-white/10"
-              style={{ transitionDelay: `${i * 30}ms` }}
             >
               {item.label}
             </a>
