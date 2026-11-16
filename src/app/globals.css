@@ -53,78 +53,78 @@
 :root {
   --radius: 0.625rem;
   /* Piako brand palette */
-  --ink: #0B0F1A;            /* deep navy-black, from logo */
-  --ink-soft: #1A1F2E;       /* slightly lighter navy for cards on dark */
-  --bone: #F6F4EE;           /* warm off-white background */
-  --olive: #6B7B3F;          /* olive green accent, from logo */
-  --olive-dark: #556332;
-  --olive-foreground: #F6F4EE;
+  --ink: #0E2233;            /* deep navy, from reference */
+  --ink-soft: #17324A;       /* slightly lighter navy for cards on dark */
+  --bone: #ECEEF0;           /* light grey canvas */
+  --olive: #F6B400;          /* signature yellow accent */
+  --olive-dark: #E3A300;
+  --olive-foreground: #0E2233;
 
-  --background: #F6F4EE;
-  --foreground: #0B0F1A;
+  --background: #ECEEF0;
+  --foreground: #0E2233;
   --card: #FFFFFF;
-  --card-foreground: #0B0F1A;
+  --card-foreground: #0E2233;
   --popover: #FFFFFF;
-  --popover-foreground: #0B0F1A;
-  --primary: #0B0F1A;
-  --primary-foreground: #F6F4EE;
-  --secondary: #ECEAE1;
-  --secondary-foreground: #0B0F1A;
-  --muted: #ECEAE1;
-  --muted-foreground: #5A5F6C;
-  --accent: #6B7B3F;
-  --accent-foreground: #F6F4EE;
+  --popover-foreground: #0E2233;
+  --primary: #0E2233;
+  --primary-foreground: #ECEEF0;
+  --secondary: #E3E5E8;
+  --secondary-foreground: #0E2233;
+  --muted: #E3E5E8;
+  --muted-foreground: #5A6470;
+  --accent: #F6B400;
+  --accent-foreground: #0E2233;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #E2DFD4;
-  --input: #E2DFD4;
-  --ring: #6B7B3F;
-  --chart-1: #0B0F1A;
-  --chart-2: #6B7B3F;
-  --chart-3: #A7B17A;
+  --border: #DCE0E4;
+  --input: #DCE0E4;
+  --ring: #F6B400;
+  --chart-1: #0E2233;
+  --chart-2: #F6B400;
+  --chart-3: #F9CE5C;
   --chart-4: #C9CFB0;
-  --chart-5: #5A5F6C;
+  --chart-5: #5A6470;
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #0B0F1A;
-  --sidebar-primary: #0B0F1A;
-  --sidebar-primary-foreground: #F6F4EE;
-  --sidebar-accent: #ECEAE1;
-  --sidebar-accent-foreground: #0B0F1A;
-  --sidebar-border: #E2DFD4;
-  --sidebar-ring: #6B7B3F;
+  --sidebar-foreground: #0E2233;
+  --sidebar-primary: #0E2233;
+  --sidebar-primary-foreground: #ECEEF0;
+  --sidebar-accent: #E3E5E8;
+  --sidebar-accent-foreground: #0E2233;
+  --sidebar-border: #DCE0E4;
+  --sidebar-ring: #F6B400;
 }
 
 .dark {
-  --background: #0B0F1A;
-  --foreground: #F6F4EE;
-  --card: #1A1F2E;
-  --card-foreground: #F6F4EE;
-  --popover: #1A1F2E;
-  --popover-foreground: #F6F4EE;
-  --primary: #F6F4EE;
+  --background: #0E2233;
+  --foreground: #ECEEF0;
+  --card: #17324A;
+  --card-foreground: #ECEEF0;
+  --popover: #17324A;
+  --popover-foreground: #ECEEF0;
+  --primary: #ECEEF0;
   --primary-foreground: #0B0F1A;
-  --secondary: #232A3D;
-  --secondary-foreground: #F6F4EE;
-  --muted: #232A3D;
-  --muted-foreground: #A0A4B0;
-  --accent: #6B7B3F;
-  --accent-foreground: #F6F4EE;
+  --secondary: #1B3A54;
+  --secondary-foreground: #ECEEF0;
+  --muted: #1B3A54;
+  --muted-foreground: #A0AAB5;
+  --accent: #F6B400;
+  --accent-foreground: #0E2233;
   --destructive: oklch(0.704 0.191 22.216);
   --border: rgba(255,255,255,0.08);
   --input: rgba(255,255,255,0.12);
-  --ring: #6B7B3F;
-  --chart-1: #F6F4EE;
-  --chart-2: #6B7B3F;
-  --chart-3: #A7B17A;
+  --ring: #F6B400;
+  --chart-1: #ECEEF0;
+  --chart-2: #F6B400;
+  --chart-3: #F9CE5C;
   --chart-4: #C9CFB0;
-  --chart-5: #A0A4B0;
-  --sidebar: #1A1F2E;
-  --sidebar-foreground: #F6F4EE;
-  --sidebar-primary: #F6F4EE;
-  --sidebar-primary-foreground: #0B0F1A;
-  --sidebar-accent: #232A3D;
-  --sidebar-accent-foreground: #F6F4EE;
+  --chart-5: #A0AAB5;
+  --sidebar: #17324A;
+  --sidebar-foreground: #ECEEF0;
+  --sidebar-primary: #ECEEF0;
+  --sidebar-primary-foreground: #0E2233;
+  --sidebar-accent: #1B3A54;
+  --sidebar-accent-foreground: #ECEEF0;
   --sidebar-border: rgba(255,255,255,0.08);
-  --sidebar-ring: #6B7B3F;
+  --sidebar-ring: #F6B400;
 }
 
 @layer base {
@@ -185,12 +185,9 @@
   background-size: 64px 64px;
 }
 
-/* Subtle paper texture for light sections */
+/* Clean white surface for light sections */
 .paper-bg {
-  background-color: var(--bone);
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(11,15,26,0.04) 1px, transparent 0);
-  background-size: 24px 24px;
+  background-color: #ffffff;
 }
 
 /* Animated marquee */
@@ -240,10 +237,97 @@
 
 /* Card hover lift */
 .card-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 .card-lift:hover {
   transform: translateY(-6px);
+  box-shadow: 0 22px 45px -32px rgba(14, 34, 51, 0.45);
+}
+
+/* Above-the-fold entrance animation (CSS so it runs before hydration) */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-rise {
+  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.animate-draw {
+  animation: draw-line 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-settle {
+  animation: settle-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Understated underline for desktop navigation */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -9px;
+  height: 1px;
+  background: var(--olive);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-float,
+  .animate-rise,
+  .animate-settle,
+  .animate-draw {
+    animation: none;
+  }
+  .card-lift:hover {
+    transform: none;
+  }
+  .link-underline::after,
+  .nav-link::after {
+    transition: none;
+  }
 }
 
 /* Scrollbar styling for filterable lists */
@@ -252,7 +336,7 @@
   height: 8px;
 }
 .styled-scroll::-webkit-scrollbar-thumb {
-  background: rgba(107, 123, 63, 0.4);
+  background: rgba(246, 180, 0, 0.45);
   border-radius: 8px;
 }
 .styled-scroll::-webkit-scrollbar-track {

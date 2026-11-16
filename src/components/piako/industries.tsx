@@ -1,76 +1,90 @@
 "use client";
 
-import {
-  Landmark,
-  Globe2,
-  HeartPulse,
-  Droplets,
-  GraduationCap,
-  Building2,
-  Handshake,
-} from "lucide-react";
-import { INDUSTRIES } from "@/lib/piako/content";
-
-const ICONS: Record<string, React.ElementType> = {
-  Government: Landmark,
-  "Development Partners": Globe2,
-  Healthcare: HeartPulse,
-  "Water and Infrastructure": Droplets,
-  "Education and Institutions": GraduationCap,
-  "Private Sector": Building2,
-  Partnerships: Handshake,
-};
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowUpRight, HelpCircle, PhoneCall, Building2 } from "lucide-react";
+import { PageHeader } from "@/components/piako/page-header";
+import { revealUp } from "@/components/piako/motion";
+import { INDUSTRIES_DATA } from "@/lib/piako/industries-data";
+import { IndustryCard } from "@/components/piako/industries/industry-card";
+import { IndustriesStats } from "@/components/piako/industries/industries-stats";
 
 export function Industries() {
   return (
-    <section id="industries" className="bg-bone section-pad border-y border-ink/10">
+    <section id="industries" className="paper-bg section-pad min-h-screen">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 mb-12 md:mb-16">
-          <div className="lg:col-span-7">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="olive-rule" />
-              <span className="eyebrow text-olive">04 — Industries</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
-              Sectors we serve, with the institutions that trust us.
-            </h2>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-base text-ink/65 leading-relaxed">
-              Piako works across the public, development, institutional and
-              private sector landscape &mdash; bringing the right engineering,
-              procurement and supervisory capability to each.
+        {/* Page Header */}
+        <PageHeader
+          eyebrow="Industries & Sectors"
+          title="Engineering Solutions Across Public, Institutional and Commercial Sectors."
+          intro={
+            <p>
+              Piako Consult Ltd coordinates planning, detailed design, geotechnical
+              investigations, and construction supervision tailored to the unique
+              governance, procurement, and technical demands of each sector.
             </p>
-          </div>
+          }
+          actions={
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2.5 bg-olive hover:bg-olive-dark text-white text-sm font-bold pl-5 pr-1.5 py-1.5 rounded-full transition-colors"
+            >
+              Discuss your sector requirements
+              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors">
+                <ArrowUpRight className="w-4 h-4" />
+              </span>
+            </Link>
+          }
+        />
+
+        {/* Quick Jump & Accreditation Badges */}
+        <IndustriesStats />
+
+        {/* Detailed Industry Cards Showcase */}
+        <div className="space-y-8 md:space-y-12">
+          {INDUSTRIES_DATA.map((ind, i) => (
+            <motion.div key={ind.id} {...revealUp(Math.min(i * 0.05, 0.25))}>
+              <IndustryCard industry={ind} index={i} />
+            </motion.div>
+          ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {INDUSTRIES.map((ind, i) => {
-            const Icon = ICONS[ind.name] ?? Landmark;
-            const wide = i === 0; // first card spans wider on lg
-            return (
-              <article
-                key={ind.name}
-                className={`group relative bg-white border border-ink/10 rounded-2xl p-7 card-lift overflow-hidden ${
-                  wide ? "lg:col-span-2 xl:col-span-2" : ""
-                }`}
+        {/* Bottom Tender Consultation Callout */}
+        <motion.div
+          {...revealUp(0.1)}
+          className="mt-16 md:mt-24 bg-ink text-white rounded-3xl p-8 md:p-12 border border-white/10 relative overflow-hidden"
+        >
+          <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-8">
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-olive uppercase tracking-wider mb-3">
+                <Building2 className="w-4 h-4" />
+                Inter-Disciplinary Capability
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
+                Require a multidisciplinary team for an upcoming sector program?
+              </h3>
+              <p className="mt-3 text-sm md:text-base text-white/70 max-w-2xl leading-relaxed">
+                Whether structuring a public-private healthcare partnership, supervising donor-funded urban water reticulation, or managing commercial hospitality construction, Piako brings every discipline together under one accountable mandate.
+              </p>
+            </div>
+            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-end">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 bg-olive hover:bg-olive-dark text-white font-bold px-7 py-3.5 rounded-full transition-colors text-sm text-center"
               >
-                <div className="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-olive/5 group-hover:bg-olive/10 transition-colors" />
-                <div className="relative">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-ink text-olive mb-5">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-ink mb-2">
-                    {ind.name}
-                  </h3>
-                  <p className="text-sm text-ink/65 leading-relaxed">
-                    {ind.description}
-                  </p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+                Request Sector Capability Profile
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+              <a
+                href="mailto:info@consultpiako.com"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:bg-white/10 text-white font-medium px-6 py-3.5 rounded-full transition-colors text-sm text-center"
+              >
+                <PhoneCall className="w-4 h-4" />
+                info@consultpiako.com
+              </a>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

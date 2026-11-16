@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist_Mono, Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
+const geistSans = Manrope({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const geistMono = Geist_Mono({
@@ -13,14 +15,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const displayFont = Space_Grotesk({
+const displayFont = Plus_Jakarta_Sans({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Piako Consult Ltd — Engineering. Infrastructure. Development.",
+  title: {
+    default: "Piako Consult Ltd — Engineering. Infrastructure. Development.",
+    template: "%s — Piako Consult Ltd",
+  },
   description:
     "Piako Consult Ltd is a multidisciplinary engineering and infrastructure consultancy delivering integrated planning, design, surveying, engineering and project management solutions across Uganda, Malawi and Nigeria.",
   keywords: [
@@ -64,8 +69,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${displayFont.variable} antialiased bg-background text-foreground`}
       >
-        {children}
-        <Toaster />
+        <MotionConfig reducedMotion="user">
+          {children}
+          <Toaster />
+        </MotionConfig>
       </body>
     </html>
   );

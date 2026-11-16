@@ -1,34 +1,30 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Mail, GraduationCap } from "lucide-react";
+import { PageHeader } from "@/components/piako/page-header";
+import { revealUp } from "@/components/piako/motion";
 import { OPEN_ROLES, CONTACT } from "@/lib/piako/content";
 
 export function Careers() {
   return (
     <section id="careers" className="paper-bg section-pad">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 mb-14 md:mb-20">
-          <div className="lg:col-span-7">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="olive-rule" />
-              <span className="eyebrow text-olive">06 — Careers</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
-              Build Africa&apos;s infrastructure. Build your career with Piako.
-            </h2>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-base text-ink/65 leading-relaxed">
+        <PageHeader
+          eyebrow="Join Piako"
+          title="Build Africa's infrastructure. Build your career with Piako."
+          intro={
+            <p>
               We are an engineering consultancy that invests in technical depth,
               mentoring and exposure to multi-sector projects. If you want to do
               serious engineering work that matters, we want to hear from you.
             </p>
-          </div>
-        </div>
+          }
+        />
 
         <div className="grid lg:grid-cols-12 gap-6">
           {/* Image + graduate programme */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div {...revealUp(0.04)} className="lg:col-span-5 space-y-6">
             <div className="relative rounded-2xl overflow-hidden">
               <img
                 src="/images/careers.png"
@@ -59,7 +55,7 @@ export function Careers() {
                 <span className="text-olive font-medium">quarterly</span>.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Open roles */}
           <div className="lg:col-span-7">
@@ -73,9 +69,10 @@ export function Careers() {
             </div>
 
             <div className="border-t border-ink/10">
-              {OPEN_ROLES.map((r) => (
-                <div
+              {OPEN_ROLES.map((r, i) => (
+                <motion.div
                   key={r.title}
+                  {...revealUp(i * 0.05, 14)}
                   className="group flex items-center justify-between gap-4 py-5 border-b border-ink/10 hover:bg-white/60 transition-colors px-3 -mx-3 rounded-lg"
                 >
                   <div className="min-w-0">
@@ -101,12 +98,15 @@ export function Careers() {
                     Apply
                     <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
                   </a>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* General CV submission */}
-            <div className="mt-8 bg-white border border-ink/10 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+            <motion.div
+              {...revealUp(0.08)}
+              className="mt-8 bg-white border border-ink/10 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
+            >
               <div>
                 <div className="font-display text-lg font-semibold text-ink">
                   Don&apos;t see your role?
@@ -118,12 +118,12 @@ export function Careers() {
               </div>
               <a
                 href={`mailto:${CONTACT.email}?subject=General CV Submission`}
-                className="inline-flex items-center gap-2 bg-olive hover:bg-olive-dark text-white font-semibold px-5 py-3 rounded-full transition-colors whitespace-nowrap"
+                className="inline-flex items-center gap-2 bg-olive hover:bg-olive-dark text-ink font-bold px-5 py-3 rounded-full transition-colors whitespace-nowrap"
               >
                 <Mail className="w-4 h-4" />
                 Submit your CV
               </a>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

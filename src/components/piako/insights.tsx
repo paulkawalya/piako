@@ -1,102 +1,141 @@
 "use client";
 
-import { ArrowUpRight, ArrowRight } from "lucide-react";
-import { INSIGHTS } from "@/lib/piako/content";
+import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search } from "lucide-react";
+import { PageHeader } from "@/components/piako/page-header";
+import { revealUp } from "@/components/piako/motion";
+import { ARTICLES_DATA, Article } from "@/lib/piako/insights-data";
+import { FeaturedArticle } from "@/components/piako/insights/featured-article";
+import { ArticleCard } from "@/components/piako/insights/article-card";
+import { NewsletterBox } from "@/components/piako/insights/newsletter-box";
 
 export function Insights() {
+  const categories = useMemo(() => {
+    return ["All", ...Array.from(new Set(ARTICLES_DATA.map((a) => a.category)))];
+  }, []);
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    return ARTICLES_DATA.filter((a) => {
+      const matchCategory =
+        selectedCategory === "All" || a.category === selectedCategory;
+      const query = searchQuery.toLowerCase().trim();
+      const matchQuery =
+        !query ||
+        a.title.toLowerCase().includes(query) ||
+        a.excerpt.toLowerCase().includes(query) ||
+        a.author.toLowerCase().includes(query) ||
+        a.category.toLowerCase().includes(query);
+      return matchCategory && matchQuery;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Featured article is the first matching article or default featured
+  const featured = filtered[0];
+  const gridArticles = filtered.slice(1);
+
   return (
-    <section id="insights" className="bg-bone section-pad border-t border-ink/10">
+    <section id="insights" className="paper-bg section-pad min-h-screen">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 mb-12 md:mb-16">
-          <div className="lg:col-span-7">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="olive-rule" />
-              <span className="eyebrow text-olive">07 — Insights</span>
+        {/* Page Header */}
+        <PageHeader
+          eyebrow="Insights & Field Reports"
+          title="Engineering Knowledge, Case Studies and Industry Analysis."
+          intro={
+            <p>
+              Practical technical articles authored by Piako engineers, drawing directly from field experiences across hospital construction, urban water networks, and geotechnical investigations.
+            </p>
+          }
+        />
+
+        {/* Filter Bar & Search */}
+        <motion.div {...revealUp(0.04)} className="bg-white border border-ink/10 rounded-3xl p-5 md:p-6 mb-10 shadow-sm space-y-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink/40 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search articles by topic, project, or keyword…"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-bone rounded-full text-sm text-ink placeholder:text-ink/40 border border-ink/10 focus:outline-none focus:border-olive focus:ring-1 focus:ring-olive transition-all"
+              />
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
-              Engineering articles, project milestones and industry updates.
-            </h2>
+            <div className="text-xs font-mono text-ink/50 whitespace-nowrap self-end md:self-auto">
+              {filtered.length} publication{filtered.length !== 1 ? "s" : ""}
+            </div>
           </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-base text-ink/65 leading-relaxed">
-              Practical, plain-language writing from our engineers. Subscribe to
-              receive new posts in your inbox.
-            </p>
-          </div>
-        </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {INSIGHTS.map((post, i) => (
-            <article
-              key={post.title}
-              className={`group bg-white border border-ink/10 rounded-2xl overflow-hidden card-lift flex flex-col ${
-                i === 0 ? "md:col-span-1" : ""
-              }`}
-            >
-              {/* Visual header */}
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-ink to-ink-soft overflow-hidden">
-                <div className="absolute inset-0 grid-overlay opacity-40" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-7xl text-olive/30 font-bold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div className="absolute top-4 left-4">
-                  <span className="inline-block text-[10px] uppercase tracking-wider bg-olive text-white font-semibold px-2.5 py-1 rounded-full">
-                    {post.category}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6 md:p-7 flex flex-col flex-1">
-                <div className="text-xs text-ink/50 mb-3 font-mono">
-                  {post.date}
-                </div>
-                <h3 className="font-display text-lg md:text-xl font-bold text-ink leading-snug mb-3">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-ink/65 leading-relaxed flex-1">
-                  {post.excerpt}
-                </p>
-                <a
-                  href="#insights"
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-ink group-hover:text-olive transition-colors"
-                >
-                  Read more
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+          <div className="h-px bg-ink/5" />
 
-        {/* Subscribe strip */}
-        <div className="mt-12 md:mt-16 bg-ink text-white rounded-2xl p-7 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <div className="eyebrow text-olive mb-2">Stay informed</div>
-            <p className="font-display text-xl md:text-2xl max-w-2xl">
-              Get notified when we publish new engineering articles, project
-              milestones and tender updates.
-            </p>
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-1.5 items-center">
+            <span className="text-xs font-mono uppercase tracking-wider text-ink/50 mr-2">
+              Topic:
+            </span>
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={`text-xs font-medium px-3.5 py-1.5 rounded-full transition-colors ${
+                  selectedCategory === cat
+                    ? "bg-ink text-white"
+                    : "bg-bone text-ink/70 hover:text-ink hover:bg-ink/5 border border-ink/5"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
-          <form
-            className="flex w-full md:w-auto items-center gap-3"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              required
-              placeholder="you@organisation.org"
-              className="w-full md:w-72 bg-white/10 border border-white/15 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-olive"
-            />
+        </motion.div>
+
+        {/* Featured Article */}
+        {featured && (
+          <motion.div {...revealUp(0.06)}>
+            <FeaturedArticle article={featured} />
+          </motion.div>
+        )}
+
+        {/* Grid of Remaining Articles */}
+        {gridArticles.length > 0 && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {gridArticles.map((article, i) => (
+              <motion.div key={article.slug} {...revealUp(Math.min((i + 1) * 0.05, 0.25))}>
+                <ArticleCard article={article} />
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {filtered.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-3xl border border-ink/10 p-8">
+            <h3 className="font-display text-xl font-bold text-ink">
+              No matching publications found
+            </h3>
+            <p className="text-sm text-ink/60 mt-1 max-w-md mx-auto">
+              We couldn&apos;t find any articles matching &ldquo;{searchQuery}&rdquo;. Try selecting a different topic.
+            </p>
             <button
-              type="submit"
-              className="inline-flex items-center gap-2 bg-olive hover:bg-olive-dark text-white font-semibold px-5 py-3 rounded-full whitespace-nowrap transition-colors"
+              onClick={() => {
+                setSelectedCategory("All");
+                setSearchQuery("");
+              }}
+              className="mt-5 inline-flex items-center gap-2 bg-ink text-white text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-ink-soft transition-colors"
             >
-              Subscribe
-              <ArrowUpRight className="w-4 h-4" />
+              Reset filters
             </button>
-          </form>
-        </div>
+          </div>
+        )}
+
+        {/* Newsletter Box */}
+        <motion.div {...revealUp(0.1)}>
+          <NewsletterBox />
+        </motion.div>
       </div>
     </section>
   );

@@ -1,22 +1,24 @@
 "use client";
 
-import { Check, Target, Eye, Compass } from "lucide-react";
-import { CORE_VALUES, TEAM } from "@/lib/piako/content";
+import { motion } from "framer-motion";
+import { Check, Target, Eye, Compass, Building2, ShieldCheck, MapPin } from "lucide-react";
+import { CORE_VALUES, CONTACT } from "@/lib/piako/content";
+import { revealUp } from "@/components/piako/motion";
 
 export function About() {
   return (
-    <section id="about" className="paper-bg section-pad">
+    <section id="story" className="paper-bg section-pad">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
         {/* Section header */}
-        <div className="grid lg:grid-cols-12 gap-10 mb-16 md:mb-24">
+        <motion.div {...revealUp()} className="grid lg:grid-cols-12 gap-10 mb-12 md:mb-16">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3 mb-5">
               <span className="olive-rule" />
-              <span className="eyebrow text-olive">01 — About Us</span>
+              <span className="eyebrow text-olive">About Piako</span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05] font-bold tracking-tight text-ink">
               Vision, mission and the principles behind every project.
-            </h2>
+            </h1>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p className="text-lg text-ink/75 leading-relaxed">
@@ -43,10 +45,10 @@ export function About() {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Image + vision/mission */}
-        <div className="grid lg:grid-cols-12 gap-6 mb-16 md:mb-24">
+        <motion.div {...revealUp(0.04)} className="grid lg:grid-cols-12 gap-6 mb-16 md:mb-24">
           <div className="lg:col-span-7 relative rounded-2xl overflow-hidden">
             <img
               src="/images/about-team.png"
@@ -91,10 +93,10 @@ export function About() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Core values */}
-        <div className="mb-16 md:mb-24">
+        <div id="values" className="mb-16 md:mb-24 scroll-mt-28">
           <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
             <div>
               <div className="flex items-center gap-3 mb-3">
@@ -112,9 +114,10 @@ export function About() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 rounded-2xl overflow-hidden">
-            {CORE_VALUES.map((v) => (
-              <div
+            {CORE_VALUES.map((v, i) => (
+              <motion.div
                 key={v.name}
+                {...revealUp(i * 0.05, 12)}
                 className="bg-white p-7 md:p-8 card-lift hover:bg-bone"
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -126,60 +129,65 @@ export function About() {
                 <p className="text-sm text-ink/65 leading-relaxed">
                   {v.meaning}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Team */}
-        <div>
-          <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="olive-rule" />
-                <span className="eyebrow text-olive">Leadership</span>
+        {/* Corporate Statutory Registration & Headquarters */}
+        <motion.div
+          id="accreditation"
+          {...revealUp(0.1)}
+          className="mt-16 md:mt-24 bg-ink text-white rounded-3xl p-8 md:p-12 border border-white/10 scroll-mt-28"
+        >
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-olive" />
+                <span className="eyebrow text-olive">Statutory Accreditation & Headquarters</span>
               </div>
-              <h3 className="font-display text-3xl md:text-4xl font-bold text-ink">
-                The team behind the work.
+              <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
+                Piako Consult Ltd
               </h3>
-            </div>
-            <p className="text-sm text-ink/60 max-w-sm">
-              Detailed leadership profiles with photos, professional
-              registrations and full qualifications will follow as the team page
-              is finalised.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {TEAM.map((m) => (
-              <div
-                key={m.name}
-                className="bg-white border border-ink/10 rounded-2xl p-6 card-lift"
-              >
-                <div className="aspect-[4/5] mb-5 rounded-xl bg-gradient-to-br from-ink to-ink-soft relative overflow-hidden">
-                  <div className="absolute inset-0 grid-overlay opacity-30" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display text-6xl text-olive/40 font-bold">
-                      {m.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <span className="inline-block text-[10px] uppercase tracking-wider bg-olive text-white px-2 py-1 rounded">
-                      {m.registration}
-                    </span>
-                  </div>
+              <p className="text-white/70 text-sm md:text-base mt-2 max-w-xl leading-relaxed">
+                Incorporated and certified in the Republic of Uganda as a registered multidisciplinary engineering and infrastructure consultancy.
+              </p>
+              <div className="mt-6 flex flex-col sm:flex-row gap-4 text-xs font-mono text-white/80">
+                <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <div className="text-white/40 text-[10px] uppercase">Cert. No</div>
+                  <div className="text-sm font-bold text-white mt-0.5">{CONTACT.certNo}</div>
                 </div>
-                <div className="font-display text-lg font-semibold text-ink">
-                  {m.name}
+                <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <div className="text-white/40 text-[10px] uppercase">PPDA No.</div>
+                  <div className="text-sm font-bold text-white mt-0.5">{CONTACT.ppdaNo}</div>
                 </div>
-                <div className="text-sm text-olive font-medium mt-0.5">
-                  {m.title}
+                <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <div className="text-white/40 text-[10px] uppercase">TIN</div>
+                  <div className="text-sm font-bold text-white mt-0.5">{CONTACT.tin}</div>
                 </div>
-                <div className="text-xs text-ink/55 mt-2">{m.qualifications}</div>
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-7">
+              <div className="text-xs font-mono uppercase text-olive font-bold tracking-wider mb-2 flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-olive" />
+                Registered Office Address
+              </div>
+              <div className="font-display font-semibold text-lg text-white">
+                {CONTACT.building}
+              </div>
+              <div className="text-white/80 text-sm mt-1">
+                {CONTACT.street}
+              </div>
+              <div className="text-white/60 text-xs mt-1">
+                {CONTACT.landmark} | {CONTACT.country}
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-white/50">
+                <span>Official Web:</span>
+                <span className="text-olive font-mono">{CONTACT.website}</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
